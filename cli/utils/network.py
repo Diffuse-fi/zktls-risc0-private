@@ -24,6 +24,7 @@ class network_enum(enum.Enum):
     ETH_MAINNET = "eth_mainnet"
     ASSET_TESTNET = "asset_testnet"
     ARTHERA_TESTNET = "ARTHERA_TESTNET"
+    MONAD_TESTNET = "MONAD_TESTNET"
 
 def parse_network(value):
     try:
@@ -73,9 +74,13 @@ def chain_id(net):
             return "--chain-id=42421"
         case network_enum.ARTHERA_TESTNET:
             return "--chain-id=10243"
+        case network_enum.MONAD_TESTNET:
+            return "--chain-id=10143"
+
 
 def rpc_url(net):
     alchemy_api_key = os.getenv('ALCHEMY_API_KEY')
+    monad_api_key =  os.getenv('MONAD_API_KEY')
 
     match net:
         case network_enum.LOCAL:
@@ -90,3 +95,5 @@ def rpc_url(net):
             return "--rpc-url=https://enugu-rpc.assetchain.org/"
         case network_enum.ARTHERA_TESTNET:
             return "--rpc-url=https://rpc-test.arthera.net"
+        case network_enum.MONAD_TESTNET:
+            return "--rpc-url=https://rpc-testnet.monadinfra.com/rpc/smkuKxR14Php4gxcWPU7ZZk5DEd9xXBU"
